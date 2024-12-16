@@ -2,7 +2,7 @@ import sys
 sys.path.append('/Users/pablojerezarnau/git/RS-backend/')
 
 import numpy as np
-from Modules import database_queries
+from Modules import database_queries,database
 from config.settings import num_topics_in_database
 from Modules.database_queries import es
 np.float_ = np.float64
@@ -19,7 +19,7 @@ def read_topic_preferences_of_user(user_id):
     - list: The list of topic preferences if found, otherwise None.
     """
     # Call the get_user_by_id function from database_queries to fetch the user data
-    user_data = database_queries.get_user_by_id(user_id)
+    user_data = database.findByUserId(user_id)
 
     if user_data and 'topic_preferences' in user_data:
         # Extract and return the 'topic_preferences' field from the user data

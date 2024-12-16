@@ -153,7 +153,6 @@ def update_with_feedback(topic_preferences, feedback):
     Update the topic preferences vector according to the information in the dict feedback.
     Apply the video rating and the topic rating.
     """
-    topic_preferences=None
     video_id = feedback.get('videoId')
     print(f'Feedback processing - Processing individual feedback entries - Video rating - video_id: {video_id}')
     video_rating = feedback.get('rating')
@@ -162,7 +161,7 @@ def update_with_feedback(topic_preferences, feedback):
     topic_preferences_np = np.array(topic_preferences)
     topic_distribution_np = np.array(topic_distribution)
     # If explicit rating given
-    if video_rating != 0:
+    if video_rating and video_rating != 0:
         # Get rating weight
         weigth = explicit_rating_weights[video_rating]
         # Calculate the weighted average
