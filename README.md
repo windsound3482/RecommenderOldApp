@@ -1,7 +1,7 @@
 # Interactive Recommender System
 
 ## Description
-This repository contains the codebase for the thesis project titled "Human-centric Recommender Systems: Investigating Interaction for Transparency and User Control". In the modern digital era, recommender systems play a pivotal role in shaping online behaviors. This project aims to explore the extent to which recommendations influence user decisions and how users would exercise their right to influence automated recommendations.
+In the modern digital era, recommender systems play a pivotal role in shaping online behaviors. This project aims to explore the extent to which recommendations influence user decisions and how users would exercise their right to influence automated recommendations.
 
 ## Features
 - Frontend built with Vue.js
