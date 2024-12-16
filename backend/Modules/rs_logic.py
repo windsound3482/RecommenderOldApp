@@ -126,8 +126,8 @@ def get_recommendations(user_id):
     # Ensure we don't try to sample more topics than available
     n_recs = min(n_recs_per_model['unpersonalised'], len(available_topics))
     
-    # Sample `k` topics at random from the available topics, converting the set to a list
-    new_topics = random.sample(list(available_topics), n_recs)
+    # Sample `k` topics at  from the available topics, converting the set to a list
+    new_topics = .sample(list(available_topics), n_recs)
     print(f'Topics recommended by top-popular RS: ')
     # Get recommendations
     recommendations = []
@@ -187,7 +187,8 @@ def get_recommendations(user_id):
     scores = [processed_topic_scores.get(str(topic), 0) for topic in most_liked_topics]
 
     # print(f'Debugging - process_topic_scores: {processed_topic_scores}')
-    
+    scores= np.array(scores)
+    scores = list(scores/np.sum(scores))
     # Sample topics based on the scores (probabilities)
     sampled_topic_indices = np.random.choice(
         most_liked_topics,
