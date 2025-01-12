@@ -53,9 +53,34 @@ def getRecommendations():
         }
 
         response = es.mget(index="videos", body=mget_body)
+		
         for recommendation,doc in zip(recommendations,response['docs']):
             recommendation["video"]=doc['_source']
+
+        mget_body = {
+            "docs": [
+                {
+                    "_id": recommendation["videoId"],  # Specify the fields you want to return here
+                }
+                for recommendation in recommendations
+            ]
+        }
+
+        response = es.mget(index="topic_distributions", body=mget_body)
+		
+        for recommendation,doc in zip(recommendations,response['docs']):
+            topics=[]
+            for topicsScore in doc['_source']['most_relevant_topics']:
+                topic=database.findTopicById(topicsScore['topic_index'])
+                topics.append({
+                    "id":topicsScore['topic_index'],
+                    "description":topic['description'],
+                    "score":topicsScore['score']
+                })
+            recommendation["topics"]=topics
+            print(topics)
         return recommendations,200
+    
     return "Error",400
 
 def addTopics(videoId):
@@ -216,5 +241,8 @@ def saveInteraction():
    
 if __name__ == '__main__':
     app.run(debug=True, port=8081)
+
+
+
 
 
